@@ -1,6 +1,6 @@
 """
 MedASR Domain Dataset Generator
-Generates synthetic speech from statements, applies helicopter + radio noise,
+Generates synthetic speech from statements, applies helicopter, radio, white noise, and wind,
 optionally applies pitch/speed augmentations, and outputs JSON labels for Hugging Face.
 """
 
@@ -8,6 +8,7 @@ import os
 import random
 import json
 from pydub import AudioSegment
+import numpy as np
 import librosa
 import soundfile as sf
 from TTS.api import TTS
@@ -16,19 +17,22 @@ from TTS.api import TTS
 # CONFIG
 # -----------------------
 
-STATEMENTS_FILE = "data/clean_statements.txt"   # 100 statements, one per line
+STATEMENTS_FILE = "data/clean_statements.txt"   # 300 statements, one per line
 CLEAN_AUDIO_DIR = "data/audio_clean"
 NOISY_AUDIO_DIR = "data/audio_noisy"
 DATASET_JSON = "data/dataset.json"
 
 HELICOPTER_NOISE = "data/noise/helicopter.wav"
-STATIC_NOISE = "data/noise/static.wav"
+RADIO_NOISE = "data/noise/static.wav"       # your "radio" static
+# Optional: wind/white noise files can be generated if missing
+WHITE_NOISE = "data/noise/white.wav"
+WIND_NOISE = "data/noise/wind.wav"
 
 # Augmentation parameters
 PITCH_SHIFT_STEPS = [-1, 0, 1]      # semitones
 SPEED_FACTORS = [0.95, 1.0, 1.05]  # stretch factors
-VOLUME_NOISE_DB = (-10, -5)         # range for helicopter volume relative to clean audio
-VOLUME_STATIC_DB = (-20, -10)       # range for static volume relative to clean audio
+VOLUME_NOISE_DB = (-10, -5)         # range for helicopter/radio volume
+VOLUME_AUX_DB = (-20, -10)          # range for white/wind volume
 
 # -----------------------
 # SETUP
@@ -36,8 +40,23 @@ VOLUME_STATIC_DB = (-20, -10)       # range for static volume relative to clean 
 
 os.makedirs(CLEAN_AUDIO_DIR, exist_ok=True)
 os.makedirs(NOISY_AUDIO_DIR, exist_ok=True)
+os.makedirs(os.path.dirname(WHITE_NOISE), exist_ok=True)
 
 tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False)
+
+# -----------------------
+# GENERATE WHITE/WIND NOISE IF MISSING
+# -----------------------
+def generate_noise(file_path, duration_ms):
+    """Generates white noise of specified duration (ms)"""
+    sr = 16000
+    samples = np.random.normal(0, 0.02, int(sr * (duration_ms / 1000.0)))
+    sf.write(file_path, samples, sr)
+    print(f"Generated noise file: {file_path}")
+
+for noise_file in [WHITE_NOISE, WIND_NOISE]:
+    if not os.path.exists(noise_file):
+        generate_noise(noise_file, duration_ms=3000)  # 3 sec default, will loop later
 
 # -----------------------
 # LOAD STATEMENTS
@@ -61,24 +80,17 @@ def augment_audio(y, sr):
         y = librosa.effects.time_stretch(y, speed_factor)
     return y
 
-def add_noise(clean_path, heli_path, static_path, out_path):
+def add_noise(clean_path, noise_files, out_path):
     clean = AudioSegment.from_wav(clean_path)
-    heli = AudioSegment.from_wav(heli_path)
-    static = AudioSegment.from_wav(static_path)
-
-    # Loop noises to match clean audio duration
-    heli = heli * ((len(clean) // len(heli)) + 1)
-    static = static * ((len(clean) // len(static)) + 1)
-    heli = heli[:len(clean)]
-    static = static[:len(clean)]
-
-    # Random volume adjustments
-    heli_vol = random.randint(VOLUME_NOISE_DB[0], VOLUME_NOISE_DB[1])
-    static_vol = random.randint(VOLUME_STATIC_DB[0], VOLUME_STATIC_DB[1])
-
-    mix = clean.overlay(heli + heli_vol)
-    mix = mix.overlay(static + static_vol)
-
+    mix = clean
+    for noise_file, vol_range in noise_files:
+        noise = AudioSegment.from_wav(noise_file)
+        # Loop noise to match clean audio duration
+        noise = noise * ((len(clean) // len(noise)) + 1)
+        noise = noise[:len(clean)]
+        # Random volume
+        vol = random.randint(vol_range[0], vol_range[1])
+        mix = mix.overlay(noise + vol)
     mix.export(out_path, format="wav")
 
 # -----------------------
@@ -86,9 +98,15 @@ def add_noise(clean_path, heli_path, static_path, out_path):
 # -----------------------
 
 dataset_entries = []
+noise_variants = [
+    ("_heli.wav", [(HELICOPTER_NOISE, VOLUME_NOISE_DB)]),
+    ("_radio.wav", [(RADIO_NOISE, VOLUME_NOISE_DB)]),
+    ("_white.wav", [(WHITE_NOISE, VOLUME_AUX_DB)]),
+    ("_wind.wav", [(WIND_NOISE, VOLUME_AUX_DB)])
+]
 
-for i, text in enumerate(statements):
-    print(f"[{i+1}/{len(statements)}] Generating clean TTS audio...")
+for i, text in enumerate(statements[:300]):  # Use first 300 rows
+    print(f"[{i+1}/300] Generating clean TTS audio...")
     clean_path = os.path.join(CLEAN_AUDIO_DIR, f"{i:03d}.wav")
     
     # Generate base TTS audio
@@ -99,15 +117,14 @@ for i, text in enumerate(statements):
     y_aug = augment_audio(y, sr)
     sf.write(clean_path, y_aug, sr)
     
-    # Add helicopter + static noise
-    noisy_path = os.path.join(NOISY_AUDIO_DIR, f"{i:03d}.wav")
-    add_noise(clean_path, HELICOPTER_NOISE, STATIC_NOISE, noisy_path)
-    
-    # Append JSON entry
-    dataset_entries.append({
-        "path": noisy_path,
-        "transcription": text
-    })
+    # Create 4 noisy versions per clean file
+    for suffix, noise_list in noise_variants:
+        noisy_path = os.path.join(NOISY_AUDIO_DIR, f"{i:03d}{suffix}")
+        add_noise(clean_path, noise_list, noisy_path)
+        dataset_entries.append({
+            "path": noisy_path,
+            "transcription": text
+        })
 
 # -----------------------
 # SAVE JSON MANIFEST
@@ -116,4 +133,4 @@ for i, text in enumerate(statements):
 with open(DATASET_JSON, "w") as f:
     json.dump(dataset_entries, f, indent=2)
 
-print(f"\nDataset generation complete! JSON manifest saved to {DATASET_JSON}")
+print(f"\nDataset generation complete! Total entries: {len(dataset_entries)}")
