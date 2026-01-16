@@ -132,7 +132,6 @@ id, text
 931,"AI, this is Sentinel-36 medic in TFC, casualty with blast injury to ears. No external hemorrhage. Airway intact, patient disoriented. SpO₂ 95%, respirations normal. HR 136, BP stable. Confirm TBI evaluation and reassessment."
 932,"AI, this is Kodiak-34 medic at CCP, casualty with suspected internal bleeding. No external trauma. Airway intact, patient pale. SpO₂ 89%, respirations shallow. HR 158, BP 86 systolic. Confirm urgent MEDEVAC."
 933,"AI, this is Talon-33 medic in TFC, casualty with GSW to thigh and abdomen. CAT applied, bleeding partially controlled. Airway intact, patient anxious. SpO₂ 84%, respirations 34. HR 164, shock suspected. Confirm TXA and reassessment."
-id,text
 934,"AI, this is Phantom-50 medic at CCP, casualty with polytrauma. Hemorrhage controlled, airway intact. SpO₂ 81%, respirations rapid. HR 174, BP 76 systolic. Confirm immediate priorities before handoff."
 935,"AI, this is Echo-31 medic in TFC, casualty with blast wounds to both legs. CAT x2 applied, bleeding controlled. Airway intact, patient alert. SpO₂ 91%, respirations 28. HR 150, radial weak. Confirm TXA and rapid MEDEVAC."
 936,"AI, this is Glacier-23 medic at CCP, casualty with facial burns from fuel fire. No massive hemorrhage. Airway intact, soot in mouth noted. SpO₂ 87%, respirations rapid. HR 140, BP 92 systolic. Confirm early airway management."
@@ -500,7 +499,6 @@ id,text
 998,"“AI, this is Kodiak-37 medic at CCP, casualty with suspected internal bleeding. No external trauma. Airway intact, patient pale. SpO₂ 89%, respirations shallow. HR 158, BP 86 systolic. Confirm urgent MEDEVAC.”"
 999,"“AI, this is Talon-36 medic in TFC, casualty with GSW to thigh and abdomen. CAT applied, bleeding partially controlled. Airway intact, patient anxious. SpO₂ 84%, respirations 34. HR 164, shock suspected. Confirm TXA and reassessment.”"
 1000,"“AI, this is Phantom-56 medic at CCP, casualty with polytrauma. Hemorrhage controlled, airway intact. SpO₂ 81%, respirations rapid. HR 174, BP 76 systolic. Confirm immediate priorities before handoff.”"
-Statement_ID,Report_Text
 501,"AI, this is Echo-14 medic in TFC, casualty with GSW to right thigh. CAT applied, bleeding controlled. Airway intact, patient alert. SpO₂ 95%, respirations 26. HR 142, BP 92 systolic. Confirm TXA and reassessment."
 502,"AI, this is Falcon-23 medic at CCP, casualty with blast injuries to torso. Moderate bleeding controlled with pressure dressings. Airway intact, patient anxious. SpO₂ 87%, respirations 32. HR 152, BP 82 systolic. Confirm urgent surgical MEDEVAC."
 503,"AI, this is Ranger-23 medic in TFC, casualty with suspected tension pneumothorax. Chest seal in place, SpO₂ 81%, breath sounds absent right. Airway intact, dyspneic. HR 162, BP 78 systolic. Confirm needle decompression."
@@ -651,7 +649,6 @@ Statement_ID,Report_Text
 648,"AI, this is Saber-37 medic at CCP, casualty with scalp lacerations. Bleeding controlled. Airway intact, patient confused. SpO₂ 95%, respirations normal. HR 124, BP stable. Confirm TBI precautions and reassessment."
 649,"AI, this is Falcon-30 medic in TFC, casualty with shrapnel wound to abdomen. Bleeding minimal, patient pale. Airway intact. SpO₂ 90%, respirations shallow. HR 148, BP 92 systolic. Confirm urgent surgical evac prep."
 650,"AI, this is Vortex-21 medic at CCP, casualty with crush injury to leg. Bleeding controlled, swelling severe. Airway intact, patient alert. SpO₂ 95%, respirations normal. HR 144, BP stable. Confirm compartment syndrome monitoring."
-id,text
 1,"AI, this is Ranger-20 medic in TFC, casualty with GSW to left arm. Bleeding controlled, distal pulses strong. Airway intact, patient alert. SpO₂ 97%, respirations steady. HR 120, BP stable. Confirm continued MARCH protocol and reassessment."
 2,"AI, this is Nomad-18 medic at CCP, casualty with severe dehydration. No trauma noted. Airway intact, patient weak and dizzy. SpO₂ 98%, respirations rapid. HR 146, BP 86 systolic. Confirm IV fluids and monitoring."
 3,"AI, this is Sentinel-16 medic in TFC, casualty with blast injury to ears. No external hemorrhage. Airway intact, patient disoriented. SpO₂ 95%, respirations normal. HR 128, BP stable. Confirm TBI evaluation and reassessment."
@@ -792,7 +789,6 @@ id,text
 138,"AI, this is Kodiak-11 medic at CCP, casualty with suspected internal bleeding. No external trauma. Airway intact, patient pale. SpO₂ 91%, respirations shallow. HR 152, BP 82 systolic. Confirm urgent MEDEVAC."
 139,"AI, this is Talon-12 medic in TFC, casualty with GSW to thigh and abdomen. CAT applied, bleeding partially controlled. Airway intact, patient anxious. SpO₂ 88%, respirations 32. HR 156, shock suspected. Confirm TXA and reassessment."
 140,"AI, this is Phantom-14 medic at CCP, casualty with polytrauma. Hemorrhage controlled, airway intact. SpO₂ 85%, respirations rapid. HR 158, BP 78 systolic. Confirm immediate priorities before handoff."
-id,text
 226,"AI, this is Saber-15 medic at CCP, casualty with scalp lacerations. Bleeding controlled. Airway intact, patient confused. SpO₂ 95%, respirations normal. HR 110, BP stable. Confirm TBI precautions and reassessment."
 227,"AI, this is Falcon-14 medic in TFC, casualty with shrapnel wound to abdomen. Bleeding minimal, patient pale. Airway intact. SpO₂ 92%, respirations shallow. HR 138, BP 90 systolic. Confirm urgent surgical evac prep."
 228,"AI, this is Vortex-8 medic at CCP, casualty with crush injury to leg. Bleeding controlled, swelling severe. Airway intact, patient alert. SpO₂ 96%, respirations normal. HR 130, BP stable. Confirm compartment syndrome precautions."
@@ -893,7 +889,6 @@ id,text
 323,"AI, this is Hawk-14 medic at CCP, casualty with GSW to shoulder. Bleeding controlled, swelling progressing. Airway intact, patient anxious. SpO₂ 93%, respirations 24. HR 128, BP stable. Confirm vascular injury monitoring and evac prep."
 324,"AI, this is Saber-12 medic in TFC, casualty with scalp lacerations. Bleeding controlled. Airway intact, patient confused. SpO₂ 95%, respirations normal. HR 110, BP stable. Confirm TBI precautions and reassessment."
 325,"AI, this is Falcon-12 medic at CCP, casualty with shrapnel wound to abdomen. Bleeding minimal, patient pale. Airway intact. SpO₂ 91%, respirations shallow. HR 136, BP 92 systolic. Confirm urgent surgical evac prep."
-id,text
 326,"AI, this is Echo-3 medic in TFC, casualty with GSW to left thigh. CAT applied high and tight, bleeding controlled. Airway intact, patient alert. SpO₂ 95%, respirations 26. HR 138, radial weak. Confirm TXA and reassessment sequence."
 327,"AI, this is Falcon-4 medic at CCP, casualty post-blast with shrapnel to right arm. Moderate bleeding controlled with pressure dressing. Airway intact, patient anxious. SpO₂ 93%, respirations shallow. HR 132, BP 90 systolic. Confirm analgesia and evac prep."
 328,"AI, this is Ranger-6 medic in TFC, casualty with suspected tension pneumothorax. Chest seal in place, SpO₂ 82%, breath sounds absent left. Airway intact but dyspneic. HR 146, skin cool. Confirm needle decompression 2nd ICS AAL."
@@ -924,7 +919,6 @@ id,text
 353,"AI, this is Ranger-11 medic at CCP, casualty with GSW to arm. Bleeding controlled, distal pulses strong. Airway intact, patient alert. SpO₂ 97%, respirations steady. HR 110, BP stable. Confirm continued MARCH protocol and monitoring."
 354,"AI, this is Nomad-11 medic in TFC, casualty with severe dehydration. No trauma. Airway intact, weak and dizzy. SpO₂ 98%, respirations rapid. HR 134, BP 86 systolic. Confirm IV fluids and monitoring."
 355,"AI, this is Sentinel-8 medic at CCP, casualty with blast injury to ears. No hemorrhage. Airway intact, patient confused. SpO₂ 95%, respirations normal. HR 116, BP stable. Confirm TBI evaluation and reassessment."
-id,text
 356,"AI, this is Echo-9 medic in TFC, casualty with GSW to right hip. Junctional tourniquet applied, bleeding controlled. Airway intact, patient lethargic. SpO₂ 90%, respirations 28. HR 144, radial pulse absent. Confirm TXA and rapid fluid resuscitation."
 357,"AI, this is Falcon-16 medic at CCP, casualty with blast-related traumatic brain injury. No massive hemorrhage. Airway supported with NPA, GCS 9. SpO₂ 94%, respirations 18. HR 105, BP 140/90. Confirm TBI management and 3% saline if available."
 358,"AI, this is Ranger-16 medic in TFC, casualty with shrapnel wound to right chest. Sucking chest wound noted, vented seal applied. SpO₂ 88%, respirations 32 and labored. HR 136, BP 94 systolic. Confirm needle decompression if symptoms worsen."
