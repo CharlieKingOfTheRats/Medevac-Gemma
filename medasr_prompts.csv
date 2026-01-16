@@ -1,4 +1,4 @@
-ID,Callsign,Location,Transcript
+id, text
 801,Echo-26,TFC,"AI, this is Echo-26 medic in TFC, casualty with GSW to right thigh. CAT applied, bleeding controlled. Airway intact, patient alert. SpO₂ 94%, respirations 26. HR 142, BP 98 systolic. Confirm TXA and reassessment."
 802,Falcon-38,CCP,"AI, this is Falcon-38 medic at CCP, casualty with blast injuries to torso. Moderate bleeding controlled with pressure dressings. Airway intact, patient anxious. SpO₂ 86%, respirations 32. HR 158, BP 80 systolic. Confirm urgent surgical MEDEVAC."
 803,Ranger-38,TFC,"AI, this is Ranger-38 medic in TFC, casualty with suspected tension pneumothorax. Chest seal in place, SpO₂ 78%, breath sounds absent left. Airway intact, dyspneic. HR 164, BP 74 systolic. Confirm needle decompression."
