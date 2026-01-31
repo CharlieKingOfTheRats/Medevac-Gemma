@@ -1,4 +1,4 @@
-# 🩺 Medevac-Gemma
+# ⛑️ Medevac-Gemma
 
 **Offline, voice-activated Tactical Combat Casualty Care (TCCC) AI assistant**
 Built for military combat medics, field experimentation, and applied medical AI research.
