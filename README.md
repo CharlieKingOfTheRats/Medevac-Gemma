@@ -43,11 +43,11 @@ Medevac-Gemma is a fully local **speech-to-speech** system that listens to a med
 ```
 Microphone
    ↓
-Military ASR (medasr-mil / Faster-Whisper)
+Military ASR (CharlieKingOfTheRats/medasr-mil)
    ↓
 Conversation Manager
    ↓
-MedGemma 1.5 4B Fine-tuned TCCC LLM (llama.cpp / GGUF)
+MedGemma 1.5 4B Fine-tuned TCCC LLM (CharlieKingOfTheRats/medgemma-1.5-4b-tccc-q4)
    ↓
 Structured TCCC Response
    ↓
