@@ -1,9 +1,3 @@
-Got it. I’ll give you a **clean, professional, GitHub-ready README** that accurately reflects **what this project actually does**, how it’s built, and why it matters — without over-claiming or hand-wavy buzzwords.
-
-You can copy-paste this directly into `README.md` in your repo.
-
----
-
 # 🩺 Medevac-Gemma
 
 **Offline, voice-activated Tactical Combat Casualty Care (TCCC) AI assistant**
@@ -226,12 +220,3 @@ Planned or possible extensions:
 Applied AI • Medical AI • Defense-adjacent systems
 
 ---
-
-If you want, next I can:
-
-* tailor this README for **Kaggle**
-* add **architecture diagrams**
-* add **demo transcripts**
-* or write a **short project rationale / motivation section**
-
-Just tell me.
