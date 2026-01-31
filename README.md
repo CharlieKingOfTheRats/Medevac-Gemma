@@ -47,7 +47,7 @@ Military ASR (medasr-mil / Faster-Whisper)
    ↓
 Conversation Manager
    ↓
-MedGemma LLM (llama.cpp / GGUF)
+MedGemma 1.5 4B Fine-tuned TCCC LLM (llama.cpp / GGUF)
    ↓
 Structured TCCC Response
    ↓
