@@ -209,6 +209,8 @@ Two scenarios included to demonstrate robustness:
 - Severely fragmented transmission
 - Tests ASR limits and LLM robustness
 
+Youtube link of demos: https://m.youtube.com/watch?v=uNWsgeHPV0M
+
 ---
 
 ## 🧪 Training Notebooks
