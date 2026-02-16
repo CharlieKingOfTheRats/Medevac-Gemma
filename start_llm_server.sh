@@ -3,13 +3,17 @@
 
 echo "🚀 Starting MedGemma-TCCC Server..."
 
-./llama.cpp/build/bin/llama-server \
-  -m ./models/medgemma-tccc-q4.gguf \
+/Users/fiercecoyote/llama.cpp/build/bin/llama-server \
+  -m /Users/fiercecoyote/medevac-gemma/models/medgemma/medgemma-1.5-4b-tccc-lora-q4.gguf \
   -ngl 99 \
-  -c 2048 \
+  -c 1024 \
   -b 512 \
+  -ub 256 \
   --no-mmap \
-  -t 4 \
+  -t 6 \
+  -tb 6 \
+  --cont-batching \
+  -fa on\
   --port 8080 \
   --host 127.0.0.1
 
