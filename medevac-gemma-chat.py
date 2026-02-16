@@ -188,7 +188,7 @@ def process_recording():
         asr_text = clean_transcription(asr_result["text"])
         asr_time = time.time() - t0
         
-        print(f"\n📝 Transcribed: {asr_text}")
+        # print(f"\n📝 Transcribed: {asr_text}") # optional
         
         # Get LLM response
         prompt = f"{SYSTEM_PROMPT}\n\nINPUT:\n{asr_text}\n\nOUTPUT:\n"
