@@ -41,22 +41,26 @@ macOS Text-to-Speech
 
 ```
 Medevac-Gemma/
-├── demo.py                    # Main demo script (recommended)
-├── demo_clean.py              # Polished demo with minimal output
-├── demo_chat.py               # Interactive push-to-talk chat mode
-├── start_llm_server.sh        # llama-server launcher
-├── setup.sh                   # Virtual environment setup
-├── requirements.txt           # Python dependencies
-├── audio/
-│   ├── Demo1.wav             # Moderate helicopter noise scenario
-│   └── Demo2.wav             # Heavy noise + fragmented speech
-├── notebooks/
-│   ├── MedASR_Training.ipynb         # ASR fine-tuning notebook
-│   ├── MedGemma_Training.ipynb       # LLM fine-tuning notebook
-│   └── Evaluation_Notebook.ipynb    # Performance evaluation
-└── models/
-    └── medgemma-tccc-q4.gguf         # Fine-tuned, quantized LLM
+├── demo1.py                       # Pre-recorded demo script
+├── demo2.py                       # Alternate demo scenario
+├── chat.py                        # Interactive push-to-talk chat mode
+├── start_llm_server.sh            # llama-server launcher
+├── requirements.txt               # Python dependencies
+├── audio/                         # Demo audio files
+│   ├── Demo1.wav                  # Moderate helicopter noise scenario
+│   └── Demo2.wav                  # Heavy noise + fragmented speech
+├── medevac-gemma_notebooks/       # Training, evaluation, and utility notebooks
+│   ├── medasr_noise/              # Noise augmentation assets/scripts
+│   ├── Lora_to_gguf.ipynb         # Convert LoRA adapter → GGUF format
+│   ├── MedASR_Dataset_Generator.ipynb    # Synthetic ASR dataset generation
+│   ├── MedGemma_finetune_final.ipynb     # LLM fine-tuning notebook
+│   ├── medasr_military_fine_tune_w.ipynb # ASR fine-tuning notebook
+│   ├── medasr_prompts.csv         # ASR training prompt templates
+│   └── full_eval 2.csv            # Full evaluation results
+└── archive/                       # Legacy scripts and earlier iterations
 ```
+
+> **Note:** Models are not included in the repo. See [Download Models](#-download-models) below.
 
 ---
 
@@ -84,14 +88,15 @@ git clone https://github.com/CharlieKingOfTheRats/Medevac-Gemma.git
 cd Medevac-Gemma
 ```
 
-### 2. Install Dependencies
+### 2. Set Up Virtual Environment
 
 ```bash
-chmod +x setup.sh
-./setup.sh
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-This creates a virtual environment and installs:
+This installs:
 - PyTorch (with Metal support)
 - Transformers
 - Audio processing libraries (sounddevice, soundfile)
@@ -117,7 +122,7 @@ Model: [CharlieKingOfTheRats/medasr-mil](https://huggingface.co/CharlieKingOfThe
 **LLM Model:**
 Download quantized GGUF model:
 - [medgemma-1.5-4b-tccc-q4.gguf](https://huggingface.co/CharlieKingOfTheRats/medgemma-1.5-4b-tccc-q4)
-- Place in `./models/medgemma-tccc-q4.gguf`
+- Place in `./models/medgemma-tccc-q4.gguf` (create the `models/` directory if needed)
 
 ---
 
@@ -134,10 +139,13 @@ chmod +x start_llm_server.sh
 **Terminal 2** - Run Demo:
 ```bash
 source venv/bin/activate
-python3 demo.py
+python3 demo1.py
 ```
 
-This plays pre-recorded scenarios and shows system responses.
+For the alternate scenario:
+```bash
+python3 demo2.py
+```
 
 ---
 
@@ -151,7 +159,7 @@ This plays pre-recorded scenarios and shows system responses.
 **Terminal 2** - Run Interactive Chat:
 ```bash
 source venv/bin/activate
-python3 demo_chat.py
+python3 chat.py
 ```
 
 **Controls:**
@@ -209,30 +217,38 @@ Two scenarios included to demonstrate robustness:
 - Severely fragmented transmission
 - Tests ASR limits and LLM robustness
 
-Youtube link of demos: https://m.youtube.com/watch?v=uNWsgeHPV0M
+YouTube demo: https://m.youtube.com/watch?v=uNWsgeHPV0M
 
 ---
 
-## 🧪 Training Notebooks
+## 🧪 Training & Evaluation Notebooks
 
-All training and evaluation notebooks are in `notebooks/`:
+All notebooks are in `medevac-gemma_notebooks/`:
 
-### ASR Training
+### ASR Fine-Tuning (`medasr_military_fine_tune_w.ipynb`)
 - **Dataset:** [medasr-military-1300](https://huggingface.co/datasets/CharlieKingOfTheRats/medasr-military-1300)
 - **Base Model:** google/medasr
 - **Fine-tuning:** 19 epochs on synthetic combat audio
 - **Result:** 64% WER reduction vs baseline
 
-### LLM Training
+### LLM Fine-Tuning (`MedGemma_finetune_final.ipynb`)
 - **Dataset:** [medgemma_tccc](https://huggingface.co/datasets/CharlieKingOfTheRats/medgemma_tccc)
 - **Base Model:** google/medgemma-1.5-4b-it
 - **Fine-tuning:** LoRA (r=16, alpha=32), 3 epochs
 - **Result:** 21% TCCC protocol coverage improvement
 
-### Evaluation
-- **Metrics:** WER, TCCC Score, Latency, Failure Analysis
-- **Test Set:** n=30 samples with varied acoustic conditions
-- **Notebook:** Full reproducible evaluation pipeline
+### Dataset Generation (`MedASR_Dataset_Generator.ipynb`)
+- Generates synthetic combat audio training data
+- Includes noise augmentation via `medasr_noise/`
+- Prompt templates in `medasr_prompts.csv`
+
+### LoRA → GGUF Conversion (`Lora_to_gguf.ipynb`)
+- Converts trained LoRA adapter to quantized GGUF format for llama.cpp deployment
+
+### Evaluation Results (`full_eval 2.csv`)
+- Full reproducible evaluation pipeline output
+- Metrics: WER, TCCC Score, Latency, Failure Analysis
+- Test Set: n=30 samples with varied acoustic conditions
 
 ---
 
@@ -251,11 +267,7 @@ WARNING:
 [Critical safety concerns or time-sensitive issues]
 ```
 
-Designed for:
-- Radio brevity
-- Cognitive load reduction
-- Field usability
-- TCCC protocol compliance
+Designed for radio brevity, cognitive load reduction, field usability, and TCCC protocol compliance.
 
 ---
 
@@ -268,17 +280,13 @@ MedEvac-Gemma runs fully offline once models are loaded:
 ✅ Local inference via llama.cpp  
 ✅ No Wi-Fi, cellular, or cloud services required
 
-Perfect for:
-- Denied communications environments
-- GPS-denied operations
-- Austere medical facilities
-- Disaster response zones
+Perfect for denied communications environments, GPS-denied operations, austere medical facilities, and disaster response zones.
 
 ---
 
 ## 🔧 Configuration
 
-Edit `demo.py` or `start_llm_server.sh` to customize:
+Edit `demo1.py` or `start_llm_server.sh` to customize:
 
 **ASR Settings:**
 ```python
@@ -300,7 +308,7 @@ SAMPLE_RATE = 16000
 
 ---
 
-## 🎯 Performance Metrics
+## 📊 Performance Metrics
 
 | Metric | Custom | Baseline | Improvement |
 |--------|--------|----------|-------------|
@@ -308,25 +316,21 @@ SAMPLE_RATE = 16000
 | TCCC Score | 0.610 ± 0.079 | 0.502 ± 0.085 | **21.5%** |
 | Latency | 4-6s | - | Sub-7s target |
 
+Full evaluation data available in `medevac-gemma_notebooks/full_eval 2.csv`.
+
 ---
 
 ## ⚠️ Disclaimer
 
 **This project is experimental and not a medical device.**
 
-It is intended for:
-- Research and development
-- Training and education
-- Prototyping and demonstration
-- Human-in-the-loop decision support
+It is intended for research and development, training and education, prototyping and demonstration, and human-in-the-loop decision support.
 
 **All medical decisions remain the responsibility of the human operator.**
 
 ---
 
 ## 🚀 Future Work
-
-Planned enhancements:
 
 - [ ] Specialized medical TTS model (recommended for Google HAI-DEF)
 - [ ] Multi-casualty triage mode
@@ -340,13 +344,11 @@ Planned enhancements:
 
 ## 📚 Citations
 
-If you use this work, please cite:
-
 ```bibtex
 @software{medevac_gemma_2025,
   author = {Donnelly, Charles},
   title = {MedEvac-Gemma: Edge-Deployed Speech-to-Speech Medical AI},
-  year = {2025},
+  year = {2026},
   url = {https://github.com/CharlieKingOfTheRats/Medevac-Gemma}
 }
 ```
