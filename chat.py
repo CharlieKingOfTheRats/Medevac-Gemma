@@ -28,7 +28,7 @@ os.environ['TRANSFORMERS_VERBOSITY'] = 'error'
 # CONFIGURATION
 # =========================
 LLM_URL = "http://localhost:8080/completion"
-ASR_MODEL_PATH = "/Users/fiercecoyote/medevac-gemma/medevac-gemma/medasr-mil"
+ASR_MODEL_PATH = "/Users/fiercecoyote/medevac-gemma/medevac-gemma/medasr-mil" # Adjust based on your ASR path
 MAX_TOKENS = 90 # This can be adjusted based on expected response length and latency requirements
 TEMP = 0.7
 SAMPLE_RATE = 16000
