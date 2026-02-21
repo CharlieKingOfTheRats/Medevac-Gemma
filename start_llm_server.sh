@@ -3,8 +3,10 @@
 
 echo "🚀 Starting MedGemma-TCCC Server..."
 
+# Adjust the model path base on where you downloaded it from hf. After testing different configurations, this produced the most speed and stability
+
 /Users/fiercecoyote/llama.cpp/build/bin/llama-server \
-  -m /Users/fiercecoyote/medevac-gemma/models/medgemma/medgemma-1.5-4b-tccc-lora-q4.gguf \
+  -m /Users/fiercecoyote/medevac-gemma/models/medgemma/medgemma-1.5-4b-tccc-lora-q4.gguf \ 
   -ngl 99 \
   -c 1024 \
   -b 512 \
