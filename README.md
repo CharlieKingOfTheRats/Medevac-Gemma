@@ -24,9 +24,9 @@ MedEvac-Gemma is a fully local speech-to-speech system that processes a medic's 
 ```
 Microphone (Push-to-Talk)
    ↓
-Military ASR (medasr-mil)
+Military ASR (fine-tuned medasr: medasr-mil)
    ↓
-MedGemma 1.5 4B TCCC LLM (quantized 4-bit)
+MedGemma 1.5 4B TCCC LLM (fine-tuned MedGemma 4B, quantized 4-bit)
    ↓
 Structured TCCC Response
    ↓
