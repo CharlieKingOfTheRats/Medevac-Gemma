@@ -41,8 +41,8 @@ macOS Text-to-Speech
 
 ```
 Medevac-Gemma/
-├── demo1.py                       # Pre-recorded demo script
-├── demo2.py                       # Alternate demo scenario
+├── demo1.py                       # Pre-recorded demo script, using moderate background noise
+├── demo2.py                       # Alternate demo scenario, using heavy background noise
 ├── chat.py                        # Interactive push-to-talk chat mode
 ├── start_llm_server.sh            # llama-server launcher
 ├── requirements.txt               # Python dependencies
